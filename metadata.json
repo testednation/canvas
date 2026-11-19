@@ -1,0 +1,6 @@
+{
+  "name": "CanvasCraft Studio",
+  "description": "A zero-dependency, browser-native graphic design studio built with vanilla JavaScript and local storage persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

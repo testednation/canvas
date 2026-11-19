@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    user-select: none;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Bricolage Grotesque', sans-serif;
+  }
+
+  .font-mono-tabular {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom studio scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+/* Artboard workspace dot pattern */
+.workspace-dots {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.16) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.light-workspace-dots {
+  background-image: radial-gradient(rgba(71, 85, 105, 0.18) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Selection box and resize handles */
+.canvas-element {
+  position: absolute;
+  box-sizing: border-box;
+  transform-origin: center center;
+}
+
+.canvas-element.selected {
+  outline: 2px solid #6366f1;
+  outline-offset: 0px;
+}
+
+.canvas-element:not(.selected):hover {
+  outline: 1px dashed rgba(99, 102, 241, 0.65);
+}
+
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border: 2px solid #4f46e5;
+  border-radius: 2px;
+  z-index: 40;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: transform 0.1s ease;
+}
+
+.resize-handle:hover {
+  transform: scale(1.25);
+  background: #4f46e5;
+}
+
+.rotate-handle {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  color: #312e81;
+  border: 1.5px solid #4f46e5;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 45;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.rotate-handle:active {
+  cursor: grabbing;
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.canvas-element.multi-selected {
+  outline: 2px dashed #38bdf8;
+  outline-offset: 0px;
+}
+
+/* Canva Entrance Animations */
+@keyframes canva-rise {
+  0% { opacity: 0; transform: translateY(36px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes canva-pan {
+  0% { opacity: 0; transform: translateX(-42px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes canva-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes canva-pop {
+  0% { opacity: 0; transform: scale(0.55); }
+  70% { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes canva-tumble {
+  0% { opacity: 0; transform: rotate(-18deg) scale(0.7); }
+  100% { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+@keyframes canva-breathe {
+  0% { opacity: 0.3; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes canva-wipe {
+  0% { opacity: 0; clip-path: inset(0 100% 0 0); }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes canva-drift {
+  0% { opacity: 0; transform: translate(-24px, 18px) scale(0.96); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+@keyframes canva-neon-flicker {
+  0% { opacity: 0; filter: brightness(0.4); }
+  25% { opacity: 0.9; filter: brightness(1.35); }
+  45% { opacity: 0.35; filter: brightness(0.7); }
+  70% { opacity: 1; filter: brightness(1.25); }
+  85% { opacity: 0.75; }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+.anim-rise { animation: canva-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-pan { animation: canva-pan 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-fade { animation: canva-fade 0.6s ease-out both; }
+.anim-pop { animation: canva-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-tumble { animation: canva-tumble 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-breathe { animation: canva-breathe 0.8s ease-in-out both; }
+.anim-wipe { animation: canva-wipe 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-drift { animation: canva-drift 0.75s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-neon-flicker { animation: canva-neon-flicker 0.7s ease-out both; }
+
+/* Slide Transitions */
+@keyframes slide-enter-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slide-enter-slide {
+  from { opacity: 0; transform: translateX(48px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-enter-scale {
+  from { opacity: 0; transform: scale(0.88); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-enter-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.slide-trans-fade { animation: slide-enter-fade 0.45s ease-out both; }
+.slide-trans-slide { animation: slide-enter-slide 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.slide-trans-scale { animation: slide-enter-scale 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.slide-trans-wipe { animation: slide-enter-wipe 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+
+
